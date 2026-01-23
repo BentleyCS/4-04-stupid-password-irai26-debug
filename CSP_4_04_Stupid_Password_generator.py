@@ -1,4 +1,4 @@
-"""
+ """
 Problem: Stupid Password Generator
 Write a program that enters two integers n and l and generates, in alphabetical order, all possible "stupid” passwords" that consist of the following 5 characters:
 
@@ -13,7 +13,22 @@ The input is read as arguments and consists of two integers: n and l within the 
 Output Data
 Return a list of all "stupid" passwords in alphabetical order.
 """
-
 def stupidPassword(n: int, l: int):
-    pass
+    passwords = []
 
+    # Generate first l letters of the alphabet
+    letters = [chr(ord('a') + i) for i in range(l)]
+
+    # Iterate through all possible combinations
+    for d1 in range(1, n + 1):
+        for d2 in range(1, n + 1):
+            for letter1 in letters:
+                for letter2 in letters:
+                    # Character 5 must be greater than both d1 and d2
+                    max_digit = max(d1, d2)
+                    for d5 in range(max_digit + 1, n + 1):
+                        password = f"{d1}{d2}{letter1}{letter2}{d5}"
+                        passwords.append(password)
+
+    # Passwords are already in alphabetical order due to iteration order
+    return passwords
